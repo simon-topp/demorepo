@@ -19,11 +19,11 @@ jobs:
       url: http://sas-test:3080/SASStudio
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: deploy code
         run: rsync -avh -e ssh code/ sas@sas94test:/srv/sas/code/ --delete-after 
 
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: deploy config
         run: rsync -avh -e ssh config/test/ sas@sas94test:/srv/sas/config/ --delete-after
 
@@ -37,11 +37,10 @@ jobs:
       url: http://sas-prod:4080/SASStudio
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: deploy code
         run: rsync -avh -e ssh code/ sas@sas94prod:/srv/sas/code/ --delete-after 
 
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: deploy config
         run: rsync -avh -e ssh config/prod/ sas@sas94prod:/srv/sas/config/ --delete-after 
-
