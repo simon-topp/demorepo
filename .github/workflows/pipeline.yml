@@ -1,8 +1,5 @@
-# This is a basic workflow to help you get started with Actions
-
 name: Deployment
 
-# Controls when the workflow will run
 on:
   # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
@@ -13,29 +10,29 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
-  deployment:
-    # The type of runner that the job will run on
+  deploy-test:
     runs-on: [self-hosted, linux, x64]
 
     environment:
       name: test
       url: http://sas-test:3080/SASStudio
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
-
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
-        run: |
-          echo Add other actions to build,
-          pwd
-          ls -la
-
-      # Runs a set of commands using the runners shell
-      - name: sync code to test
+      - name: deploy code
         run: rsync -av -e ssh code sas@sas94test:/srv/sas/
+
+  deploy-prod:
+    runs-on: [self-hosted, linux, x64]
+
+    needs: [ deploy-test ]
+
+    environment:
+      name: production
+      url: http://sas-prod:4080/SASStudio
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: deploy code
+        run: rsync -av -e ssh code sas@sas94prod:/srv/sas/
