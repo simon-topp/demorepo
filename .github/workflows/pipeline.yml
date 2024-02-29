@@ -34,6 +34,4 @@ jobs:
 
       # Runs a set of commands using the runners shell
       - name: sync code to test
-        run: rsync -av -e code sas@sas94test:/srv/sas/
-    
-# Hello
+        run: rsync -av -e ssh code sas@sas94test:/srv/sas/
