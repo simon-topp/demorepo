@@ -21,8 +21,12 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: deploy code
-        run: rsync -avh -e ssh code/ sas@sas94test:/srv/sas/ --delete-after 
+        run: rsync -avh -e ssh code/ sas@sas94test:/srv/sas/code/ --delete-after 
 
+      - uses: actions/checkout@v3
+      - name: deploy config
+        run: rsync -avh -e ssh config/test/ sas@sas94prod:/srv/sas/config/ --delete-after 
+  
   deploy-prod:
     runs-on: [self-hosted, linux, x64]
 
@@ -35,4 +39,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: deploy code
-        run: rsync -avh -e ssh code/ sas@sas94prod:/srv/sas/ --delete-after 
+        run: rsync -avh -e ssh code/ sas@sas94prod:/srv/sas/code/ --delete-after 
+
+      - uses: actions/checkout@v3
+      - name: deploy config
+        run: rsync -avh -e ssh config/prod/ sas@sas94prod:/srv/sas/config/ --delete-after 
+
