@@ -26,15 +26,14 @@ jobs:
       - uses: actions/checkout@v3
 
       # Runs a set of commands using the runners shell
-      - name: sync code to test
-        run: rsync -av -e code sas@sas94test:/srv/sas/
-
-      # Runs a set of commands using the runners shell
       - name: Run a multi-line script
         run: |
           echo Add other actions to build,
-          echo test, and deploy your project.
           pwd
           ls -la
 
+      # Runs a set of commands using the runners shell
+      - name: sync code to test
+        run: rsync -av -e code sas@sas94test:/srv/sas/
+    
 # Hello
