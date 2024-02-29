@@ -27,7 +27,7 @@ jobs:
 
       # Runs a set of commands using the runners shell
       - name: sync code to test
-        run: rsync -av -e code sas@sas94test:/sev/sas/
+        run: rsync -av -e code sas@sas94test:/srv/sas/
 
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script
