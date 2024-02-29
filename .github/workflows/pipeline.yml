@@ -25,8 +25,8 @@ jobs:
 
       - uses: actions/checkout@v3
       - name: deploy config
-        run: rsync -avh -e ssh config/test/ sas@sas94prod:/srv/sas/config/ --delete-after 
-  
+        run: rsync -avh -e ssh config/test/ sas@sas94test:/srv/sas/config/ --delete-after
+
   deploy-prod:
     runs-on: [self-hosted, linux, x64]
 
