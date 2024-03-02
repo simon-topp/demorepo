@@ -1,1 +1,1 @@
-%put Hello;
+%put Hello world;
