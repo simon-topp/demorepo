@@ -1,3 +1,3 @@
 %let SASENV=dev;
-
-%let SASROOT=;
+%let HOME=%sysfunc(sysget(HOME));
+%let SASROOT=%superq(HOME)/demorepos;
