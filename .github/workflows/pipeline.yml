@@ -19,11 +19,19 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: deploy code
-        run: rsync -avh -e ssh code/ sas@sas94test:/srv/sas/code/ --delete-after 
+        run: |
+          rsync -avh -e ssh code/ sas@sas94test:/srv/sas/code/ --delete-after 
 
       - uses: actions/checkout@v4
       - name: deploy config
         run: rsync -avh -e ssh config/test/ sas@sas94test:/srv/sas/config/ --delete-after
+
+      - name: add deploy message
+        run: |
+          date '+%Y-%m-%d %H:%M:%S' > ./deploy.txt
+          echo "${{ github.server_url }}/${{ github.repository }}/tree/${{github.sha}}" >> ./deploy.txt
+          echo "${{ github.event.head_commit.message }}" >> deploy.txt
+          rsync -avh -e ssh ./deploy.txt sas@sas94test:/srv/sas/deploy.txt
 
   deploy-prod:
     runs-on: [ self-hosted, linux, x64 ]
