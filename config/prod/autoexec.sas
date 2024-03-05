@@ -1,3 +1,2 @@
 %let SASENV=prod;
-
-/* Only in PROD: */
+%let SASROOT=/srv/sas/code;
