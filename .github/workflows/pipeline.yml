@@ -56,4 +56,4 @@ jobs:
           date '+%Y-%m-%d %H:%M:%S' > ./deploy.txt
           echo "${{ github.server_url }}/${{ github.repository }}/tree/${{github.sha}}" >> ./deploy.txt
           echo "${{ github.event.head_commit.message }}" >> deploy.txt
-          rsync -avh -e ssh ./deploy.txt sas@sas94test:/srv/sas/deploy.txt
+          rsync -avh -e ssh ./deploy.txt sas@sas94prod:/srv/sas/deploy.txt
